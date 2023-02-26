@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      QR Code
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [style.--background]="scanActive ? '#00000000' : '#fff'">
+  <ion-card [hidden]="scanActive">
+    <ion-card-content>
+      <qrcode [qrdata]="qrCodeString" [width]="256" [errorCorrectionLevel]="'M'" *ngIf="qrCodeString"></qrcode>
+      <ion-item class="box">
+        <ion-label position="floating">Enter to any Text to Generate QR </ion-label>
+        <ion-input [(ngModel)]="qrCodeString"></ion-input>
+      </ion-item>
+      <ion-button  *ngIf="qrCodeString" expand="block" class="ion-margin" (click)="socialShare()"><ion-icon name="share-social-outline"></ion-icon>Share</ion-button>
+    </ion-card-content>
+  </ion-card>
+  
+  <div class="torch_icon">
+    <ion-icon name="flashlight-outline" (click)="toggleTorch()" [hidden]="!scanActive"></ion-icon>
+  </div>
+    <ion-button
+      [hidden]="scanActive"
+      expand="block" 
+      class="ion-margin" 
+      (click)="startScan()">
+      Scan QR Code
+    </ion-button>
+
+    <ion-item *ngIf="scannedResult && !scanActive">
+      <ion-label class="ion-text-wrap">Scanned Result: {{scannedResult}}</ion-label>
+    </ion-item>
+     
+    <ion-row class="scanner_buttons" [hidden]="!scanActive">
+      <ion-col class="ion-no-padding">
+        <ion-button (click)="stopScan()"  expand="block">Stop</ion-button>
+      </ion-col>
+    </ion-row>
+    <div class="scan_box" [hidden]="!scanActive"></div>
+</ion-content>

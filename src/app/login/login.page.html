@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="loginForm" (ngSubmit)="proceedLogin()">
+    <ion-list>
+      <ion-item>
+        <ion-input placeholder="Enter Email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-label *ngIf="loginForm.controls['email'].dirty && !loginForm.controls['email'].valid">
+        <ion-note class="error">Please enter valid email address.</ion-note>
+      </ion-label>
+
+      <ion-item>
+        <ion-input placeholder="Enter Password" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-label *ngIf="loginForm.controls['password'].dirty && !loginForm.controls['password'].valid">
+        <ion-note class="error">Please enter valid password.</ion-note>
+      </ion-label>
+    </ion-list>
+
+    <ion-button type="submit" expand="block" [disabled]="!loginForm.valid">Login</ion-button>
+  </form>
+
+</ion-content>
